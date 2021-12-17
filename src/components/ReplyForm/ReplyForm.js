@@ -10,7 +10,7 @@ const ReplyForm = ({ postReply }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="pb-5">
       <input
         name="text"
         value={text}

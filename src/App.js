@@ -9,8 +9,18 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import CommentForm from "./components/CommentForm/CommentForm";
 import CommentList from "./components/CommentList/CommentList";
 
-//TODO: Copy project and implement Recoil for state management
-//TODO: Copy project again and implement Redux for state management
+//TODO: Finish styling the RelatedVideos, RelatedVideo, and ReplyList/ReplyForm/Reply components
+//TODO: Install Redux Toolkit to project
+//TODO: Implement
+
+/** Steps to implementing Redux Toolkit
+ *  0) Install Redux to project: npm install @reduxjs/toolkit, npm install @react-redux (for React specific hooks that can be used in our project)
+ *  1) Create a Redux Store​
+ *  2) Provide the Redux Store to React​
+ *  3) Create a Redux state "Slice"​
+ *  4) Add Slice Reducers to the Store​
+ *  5) Use Redux State and Actions in React Components
+ */
 
 const App = () => {
   const [currentVideo, setCurrentVideo] = useState({
@@ -125,6 +135,7 @@ const App = () => {
           </div>
         </div>
       </div>
+      <div className="pb-5"></div>
     </>
   );
 };

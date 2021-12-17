@@ -2,11 +2,6 @@ import React, { useState, useEffect } from "react";
 import ReplyList from "../ReplyList/ReplyList";
 import ReplyForm from "../ReplyForm/ReplyForm";
 import axios from "axios";
-import Chance from "chance";
-
-const chance = Chance();
-
-//TODO: Use the Chance library to generate random names for each comment
 
 const Comment = ({ commentId, text, likes, dislikes, getComments }) => {
   const [replies, setReplies] = useState([]);
@@ -61,7 +56,7 @@ const Comment = ({ commentId, text, likes, dislikes, getComments }) => {
   return (
     <div className="card w-75 mt-3 border-0">
       <div className="card-body lead">
-        <h5 class="card-title">{chance.first()}</h5>
+        <h5 class="card-title">User</h5>
         <div className="card-text">{text} </div>
         <footer>
           <button
@@ -81,9 +76,10 @@ const Comment = ({ commentId, text, likes, dislikes, getComments }) => {
           </button>
         </footer>
       </div>
-
-      <ReplyList replies={replies} />
-      <ReplyForm postReply={postReply} />
+      <div className="mt-2" style={{ paddingLeft: "5vh" }}>
+        <ReplyList replies={replies} />
+        <ReplyForm postReply={postReply} />
+      </div>
     </div>
   );
 };
