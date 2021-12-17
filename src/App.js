@@ -9,9 +9,8 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import CommentForm from "./components/CommentForm/CommentForm";
 import CommentList from "./components/CommentList/CommentList";
 
-//TODO: Finish styling the RelatedVideos, RelatedVideo, and ReplyList/ReplyForm/Reply components
-//TODO: Install Redux Toolkit to project
-//TODO: Implement
+//TODO: Create Redux store, provide Redux store to React
+//TODO: Gameplan first slice (move currentVideo useState from App to slice, then refactor to dispatch actions as needed)
 
 /** Steps to implementing Redux Toolkit
  *  0) Install Redux to project: npm install @reduxjs/toolkit, npm install @react-redux (for React specific hooks that can be used in our project)
