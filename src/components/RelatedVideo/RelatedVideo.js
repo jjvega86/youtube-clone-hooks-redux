@@ -1,16 +1,13 @@
 import React from "react";
 
-const RelatedVideo = ({
-  title,
-  thumbnail,
-  channelTitle,
-  description,
-  videoId,
-  setVideo,
-}) => {
+import { useDispatch } from "react-redux";
+import { setVideo } from "../../features/video/videosSlice";
+
+const RelatedVideo = ({ title, thumbnail, description, videoId }) => {
+  const dispatch = useDispatch();
   return (
     <div
-      onClick={() => setVideo({ videoId, title, description })}
+      onClick={() => dispatch(setVideo({ videoId, title, description }))}
       className="container mt-5"
     >
       <div className="row">

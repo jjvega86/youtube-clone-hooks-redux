@@ -1,7 +1,7 @@
 import React from "react";
 import RelatedVideo from "../RelatedVideo/RelatedVideo";
 
-const RelatedVideos = ({ videos, setVideo }) => {
+const RelatedVideos = ({ videos }) => {
   const renderedVideos = videos.map((video) => {
     if (video.snippet) {
       return (
@@ -12,7 +12,6 @@ const RelatedVideos = ({ videos, setVideo }) => {
           title={video.snippet.title}
           description={video.snippet.description}
           channelTitle={video.snippet.channelTitle}
-          setVideo={setVideo}
         />
       );
     } else {
