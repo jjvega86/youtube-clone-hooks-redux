@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
 import ReplyList from "../ReplyList/ReplyList";
 import ReplyForm from "../ReplyForm/ReplyForm";
+
+import {
+  useAddLikeMutation,
+  useAddDisLikeMutation,
+} from "../../features/youtubeApi/youtubeApi";
 import axios from "axios";
 
 const Comment = ({ commentId, text, likes, dislikes }) => {
   const [replies, setReplies] = useState([]);
+  const [addLike] = useAddLikeMutation();
+  const [addDisLike] = useAddDisLikeMutation();
 
   useEffect(() => {
     fetchReplies();
@@ -33,24 +40,6 @@ const Comment = ({ commentId, text, likes, dislikes }) => {
     }
   };
 
-  const applyLike = async () => {
-    try {
-      await axios.patch(`http://localhost:9001/api/comments/${commentId}/like`);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const applyDislike = async () => {
-    try {
-      await axios.patch(
-        `http://localhost:9001/api/comments/${commentId}/dislike`
-      );
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
   return (
     <div className="card w-75 mt-3 border-0">
       <div className="card-body lead">
@@ -60,14 +49,14 @@ const Comment = ({ commentId, text, likes, dislikes }) => {
           <button
             type="button"
             className="btn btn-light btn-sm"
-            onClick={applyLike}
+            onClick={() => addLike(commentId)}
           >
             👍 &nbsp;&nbsp;<span className="badge bg-secondary">{likes}</span>{" "}
           </button>
           <button
             type="button"
             className="btn btn-light btn-sm"
-            onClick={applyDislike}
+            onClick={() => addDisLike(commentId)}
           >
             👎 &nbsp;&nbsp;
             <span className="badge bg-secondary">{dislikes}</span>{" "}

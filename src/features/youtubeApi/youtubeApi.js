@@ -41,6 +41,20 @@ export const youtubeApi = createApi({
       }),
       invalidatesTags: ["Comments"],
     }),
+    addLike: builder.mutation({
+      query: (commentId) => ({
+        url: `http://localhost:9001/api/comments/${commentId}/like`,
+        method: `PATCH`,
+      }),
+      invalidatesTags: ["Comments"],
+    }),
+    addDisLike: builder.mutation({
+      query: (commentId) => ({
+        url: `http://localhost:9001/api/comments/${commentId}/dislike`,
+        method: `PATCH`,
+      }),
+      invalidatesTags: ["Comments"],
+    }),
   }),
 });
 
@@ -49,4 +63,6 @@ export const {
   useGetRelatedVideosQuery,
   useGetCommentsQuery,
   useAddCommentMutation,
+  useAddLikeMutation,
+  useAddDisLikeMutation,
 } = youtubeApi;

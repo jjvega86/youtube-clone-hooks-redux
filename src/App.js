@@ -10,7 +10,6 @@ import CommentForm from "./components/CommentForm/CommentForm";
 import CommentList from "./components/CommentList/CommentList";
 
 //TODO: Move Reply API requests to youtubeApi
-//TODO: Move PATCH like/dislike functionality to youtubeApi (invalidate tag to refetch comments)
 //TODO: Analyze for performance and add enhancements to prevent unnecessary re-renders
 
 const App = () => {
