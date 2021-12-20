@@ -21,8 +21,9 @@ import CommentList from "./components/CommentList/CommentList";
 
 const App = () => {
   const [currentComments, setCurrentComments] = useState([]);
+  const [videoSearch, setVideoSearch] = useState("starwars");
   const { data: videoData = {}, isSuccess } =
-    useGetSearchVideosQuery("starwars");
+    useGetSearchVideosQuery(videoSearch);
   const dispatch = useDispatch();
   const video = useSelector(selectVideo);
 
@@ -66,7 +67,7 @@ const App = () => {
   };
 
   const searchForVideo = (searchTerm) => {
-    /* fetchYouTubeVideos(searchTerm); */
+    setVideoSearch(searchTerm);
   };
 
   const refreshComments = () => {
