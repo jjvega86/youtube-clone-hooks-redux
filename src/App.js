@@ -9,8 +9,8 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import CommentForm from "./components/CommentForm/CommentForm";
 import CommentList from "./components/CommentList/CommentList";
 
-//TODO: Move Reply API requests to youtubeApi
 //TODO: Analyze for performance and add enhancements to prevent unnecessary re-renders
+//TODO: Dispatch setVideo action from youtubeApi on each successfully GET request (remove useEffect)
 
 const App = () => {
   const [videoSearch, setVideoSearch] = useState("starwars");

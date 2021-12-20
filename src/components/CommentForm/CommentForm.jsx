@@ -5,7 +5,7 @@ import { useAddCommentMutation } from "../../features/youtubeApi/youtubeApi";
 
 const CommentForm = () => {
   const [text, setText] = useState("");
-  const [addComment, result] = useAddCommentMutation();
+  const [addComment] = useAddCommentMutation();
   const video = useSelector(selectVideo);
 
   const handleSubmit = (e) => {

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { useAddReplyMutation } from "../../features/youtubeApi/youtubeApi";
 
-const ReplyForm = ({ postReply }) => {
+const ReplyForm = ({ commentId }) => {
   const [text, setText] = useState("");
+  const [addReply] = useAddReplyMutation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postReply(text);
+    addReply({ commentId, text });
     setText("");
   };
 

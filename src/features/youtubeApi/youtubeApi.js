@@ -6,7 +6,7 @@ export const youtubeApi = createApi({
     reducerPath: "youtube",
     baseUrl: "https://www.googleapis.com/youtube/v3/",
   }),
-  tagTypes: ["Comments"],
+  tagTypes: ["Comments", "Replies"],
   endpoints: (builder) => ({
     getSearchVideos: builder.query({
       query: (searchTerm) =>
@@ -55,6 +55,20 @@ export const youtubeApi = createApi({
       }),
       invalidatesTags: ["Comments"],
     }),
+    getReplies: builder.query({
+      query: (commentId) => ({
+        url: `http://localhost:9001/api/comments/${commentId}/replies/`,
+      }),
+      providesTags: ["Replies"],
+    }),
+    addReply: builder.mutation({
+      query: ({ commentId, text }) => ({
+        url: `http://localhost:9001/api/comments/${commentId}/reply/`,
+        method: `POST`,
+        body: { text },
+      }),
+      invalidatesTags: ["Replies"],
+    }),
   }),
 });
 
@@ -65,4 +79,6 @@ export const {
   useAddCommentMutation,
   useAddLikeMutation,
   useAddDisLikeMutation,
+  useGetRepliesQuery,
+  useAddReplyMutation,
 } = youtubeApi;
