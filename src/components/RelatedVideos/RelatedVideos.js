@@ -1,7 +1,9 @@
 import React from "react";
+import { useGetRelatedVideosQuery } from "../../features/youtube/youtubeApi";
 import RelatedVideo from "../RelatedVideo/RelatedVideo";
 
-const RelatedVideos = ({ videos }) => {
+const RelatedVideos = ({ videoId }) => {
+  const { data: videos = [] } = useGetRelatedVideosQuery(videoId);
   const renderedVideos = videos.map((video) => {
     if (video.snippet) {
       return (

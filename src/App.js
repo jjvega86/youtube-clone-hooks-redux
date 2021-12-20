@@ -4,15 +4,11 @@ import { setVideo, selectVideo } from "./features/video/videosSlice";
 import { useGetSearchVideosQuery } from "./features/youtube/youtubeApi";
 import axios from "axios";
 
-import { apiKey } from "./app/apiKey";
-
 import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
 import RelatedVideos from "./components/RelatedVideos/RelatedVideos";
 import SearchBar from "./components/SearchBar/SearchBar";
 import CommentForm from "./components/CommentForm/CommentForm";
 import CommentList from "./components/CommentList/CommentList";
-
-//TODO: Add a component to the NavBar that shows the current selected video title (illustrates how dispatching action changes any view subscribed to the state)
 
 /** Steps to implementing Redux Toolkit
  *  0) Install Redux to project: npm install @reduxjs/toolkit, npm install @react-redux (for React specific hooks that can be used in our project)
@@ -24,52 +20,27 @@ import CommentList from "./components/CommentList/CommentList";
  */
 
 const App = () => {
-  const [relatedVideos, setRelatedVideos] = useState([]);
   const [currentComments, setCurrentComments] = useState([]);
-  const {
-    videos: data = [],
-    error,
-    isLoading,
-  } = useGetSearchVideosQuery("star wars");
+  const { data: videoData = {}, isSuccess } =
+    useGetSearchVideosQuery("starwars");
   const dispatch = useDispatch();
   const video = useSelector(selectVideo);
 
   useEffect(() => {
-    fetchYouTubeVideos("starwars");
-  }, []);
-
-  useEffect(() => {
-    fetchRelatedVideos(video.videoId);
-    fetchComments(video.videoId);
-  }, [video]);
-
-  const fetchYouTubeVideos = async (searchTerm) => {
-    try {
-      let response = await axios.get(
-        `https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=${apiKey}&part=snippet&type=video&maxResults=5`
-      );
-      let video = response.data.items[0];
+    if (isSuccess) {
       dispatch(
         setVideo({
-          videoId: video.id.videoId,
-          title: video.snippet.title,
-          description: video.snippet.description,
+          videoId: videoData.videoId,
+          title: videoData.title,
+          description: videoData.description,
         })
       );
-    } catch (error) {
-      console.log(error.message);
     }
-  };
-  const fetchRelatedVideos = async (videoId) => {
-    try {
-      let response = await axios.get(
-        `https://www.googleapis.com/youtube/v3/search?type=video&relatedToVideoId=${videoId}&key=${apiKey}&part=snippet`
-      );
-      setRelatedVideos(response.data.items);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  }, [videoData]);
+
+  useEffect(() => {
+    fetchComments(video.videoId);
+  }, [video]);
 
   const fetchComments = async (videoId) => {
     try {
@@ -95,7 +66,7 @@ const App = () => {
   };
 
   const searchForVideo = (searchTerm) => {
-    fetchYouTubeVideos(searchTerm);
+    /* fetchYouTubeVideos(searchTerm); */
   };
 
   const refreshComments = () => {
@@ -121,7 +92,7 @@ const App = () => {
             />
           </div>
           <div className="col-lg-4">
-            <RelatedVideos videos={relatedVideos} />
+            <RelatedVideos videoId={video.videoId} />
           </div>
         </div>
       </div>
