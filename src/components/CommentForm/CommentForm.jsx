@@ -1,11 +1,19 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectVideo } from "../../features/video/videosSlice";
+import { useAddCommentMutation } from "../../features/youtubeApi/youtubeApi";
 
-const CommentForm = ({ postComment }) => {
+const CommentForm = () => {
   const [text, setText] = useState("");
+  const [addComment, result] = useAddCommentMutation();
+  const video = useSelector(selectVideo);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment(text);
+    addComment({
+      text,
+      videoId: video.videoId,
+    });
     setText("");
   };
 
