@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetRelatedVideosQuery } from "../../features/youtube/youtubeApi";
+import { useGetRelatedVideosQuery } from "../../features/youtubeApi/youtubeApi";
 import RelatedVideo from "../RelatedVideo/RelatedVideo";
 
 const RelatedVideos = ({ videoId }) => {

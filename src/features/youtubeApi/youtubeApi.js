@@ -26,7 +26,16 @@ export const youtubeApi = createApi({
         return response.items;
       },
     }),
+    getComments: builder.query({
+      query: (videoId) => ({
+        url: `http://localhost:9001/api/comments/${videoId}`,
+      }),
+    }),
   }),
 });
 
-export const { useGetSearchVideosQuery, useGetRelatedVideosQuery } = youtubeApi;
+export const {
+  useGetSearchVideosQuery,
+  useGetRelatedVideosQuery,
+  useGetCommentsQuery,
+} = youtubeApi;

@@ -3,7 +3,7 @@ import ReplyList from "../ReplyList/ReplyList";
 import ReplyForm from "../ReplyForm/ReplyForm";
 import axios from "axios";
 
-const Comment = ({ commentId, text, likes, dislikes, getComments }) => {
+const Comment = ({ commentId, text, likes, dislikes }) => {
   const [replies, setReplies] = useState([]);
 
   useEffect(() => {
@@ -36,7 +36,6 @@ const Comment = ({ commentId, text, likes, dislikes, getComments }) => {
   const applyLike = async () => {
     try {
       await axios.patch(`http://localhost:9001/api/comments/${commentId}/like`);
-      getComments();
     } catch (error) {
       console.log(error.message);
     }
@@ -47,7 +46,6 @@ const Comment = ({ commentId, text, likes, dislikes, getComments }) => {
       await axios.patch(
         `http://localhost:9001/api/comments/${commentId}/dislike`
       );
-      getComments();
     } catch (error) {
       console.log(error.message);
     }
